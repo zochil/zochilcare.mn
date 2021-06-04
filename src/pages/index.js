@@ -66,7 +66,7 @@ function Home({ categories }) {
   return (
     <div>
       <Head>
-        <title>Crowdfund</title>
+        <title>Dusal</title>
       </Head>
       <div>
         <div className="w-full h-40 bg-gradient-to-bl from-blue-100 via-blue-500 to-blue-300">
