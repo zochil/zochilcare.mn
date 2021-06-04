@@ -40,13 +40,14 @@ const DEEP_LINKS_MAP = {
 function MakeDonationComponent({ isMobile }) {
   const { user, item, donationResult,authenticated,loading } = useAuthState();
   const dispatch = useAuthDispatch();
+  
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
       amount: router.query.amount,
       campaign_id: item.id,
       payment_method: "",
-      phone: user.user.phone,
+      phone: user.phone,
       message: "",
     },
     onSubmit: async (values) => {
@@ -82,11 +83,11 @@ function MakeDonationComponent({ isMobile }) {
           <p className="font-medium text-gray-800">Хандивлагч</p>
           <div className className="flex">
             <h2 className="w-full text-base font-semibold">
-              {(user && user.user.first_name) || <Skeleton />}
+              {(user && !!user.first_name) || <Skeleton />}
             </h2>
             <span className="font-semibold">
               {" "}
-              {(user && user.user.phone) || <Skeleton />}
+              {(user && !!user.phone) || <Skeleton />}
             </span>
           </div>
           <div className="mt-4">

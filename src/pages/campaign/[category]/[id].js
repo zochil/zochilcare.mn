@@ -42,7 +42,7 @@ function Campaign({ campaign, donations,key }) {
             <img src={campaign.image} />
           </div>
           <div className="md:w-1/2 md:pl-5">
-            <Link href={`/campaign/${campaign.category_id}`}>
+            <Link href={`/campaigns/${campaign.category_id}`}>
               <a className="block mb-2 text-sm">{campaign.category_name}</a>
             </Link>
             <h3 className="mb-4 text-2xl font-bold">{campaign.title}</h3>

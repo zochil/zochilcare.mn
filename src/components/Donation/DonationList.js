@@ -4,6 +4,7 @@ import classNames from "classnames";
 
 function DonationList({ donation,key }) {
   const { full_name, amount, created_at, message, status } = donation;
+  console.log(created_at);
   return (
     <div key={key} className="flex flex-wrap items-center justify-between px-4 py-2 mt-5 text-sm bg-white rounded-lg shadow cursor-pointer dark:bg-gray-600">
 
@@ -49,7 +50,8 @@ function DonationList({ donation,key }) {
         </div>
         <div className="flex flex-col mr-8 text-gray-600 capitalize dark:text-gray-400">
           <span className="mt-2 text-green-500 dark:text-green-200">
-            {moment(created_at).locale("mn").startOf("day").fromNow()}
+            
+            { moment(created_at).format('YYYY-MM-DD HH:mm') }
           </span>
         </div>
       </div>

@@ -14,19 +14,12 @@ const DEEP_LINKS_MAP = {
   "Capitron bank": "capitron",
   "Candy Pay": "candy",
 };
-function Success({ isMobile }) {
+function Success({ isMobile,donationResult }) {
   const [Result, setResult] = useState();
-  const { donationResult, loading } = useAuthState();
+  const {  loading } = useAuthState();
 
-  useEffect(() => {
-    try {
-      const result = JSON.parse(donationResult);
-      setResult(result)
-    } catch (error) {
-      console.error(error)
-    }
-  }, []);
- 
+  
+  console.log(donationResult);
   if (loading) {
     return (
       <div className="flex items-center justify-center w-full h-screen mx-auto bg-gray-100">
@@ -43,7 +36,7 @@ function Success({ isMobile }) {
   return (
     <div>
       <div className="my-20 leading-loose">
-        {!!Result && (
+    
           <div className="max-w-xl p-10 m-4 bg-white rounded shadow-xl ">
             <p className="font-semibold text-center text-gray-800">
               {" "}
@@ -51,9 +44,9 @@ function Success({ isMobile }) {
             </p>
             <div className className="flex">
               <h2 className="w-full text-base font-semibold">
-                {Result.invoice === "pending" && (
+                {donationResult.invoice === "pending" && (
                   <ul className="list-group">
-                    {Result.invoice.provider === "qpay" && (
+                    {donationResult.invoice.provider === "qpay" && (
                       <li className="list-group-item">
                         {isMobile &&
                           "Та өөрийн ашигладаг банкны аппликэйшний зурагтай товч дээр дарж төлбөрөө төлнө үү."}
@@ -70,13 +63,13 @@ function Success({ isMobile }) {
                 {!isMobile && (
                   <li className="woocommerce-order-overview__order list-group-item">
                     <div className="px-24">
-                      <QRCode size={200} value={Result.invoice.qrcode} />
+                      <QRCode size={200} value={donationResult.invoice.qrcode} />
                     </div>
                   </li>
                 )}
                 {isMobile && (
                   <ul className="flex flex-wrap order-deeplinks list-group">
-                    {(Result.invoice.deeplinks || [])
+                    {(donationResult.invoice.deeplinks || [])
                       .filter((deeplink) => DEEP_LINKS_MAP[deeplink.name])
                       .map((deeplink) => (
                         <li className="list-group-item">
@@ -95,7 +88,6 @@ function Success({ isMobile }) {
               </ul>
             </div>
           </div>
-        )}
       </div>
     </div>
   );

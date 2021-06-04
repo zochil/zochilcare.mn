@@ -11,7 +11,6 @@ function Navbar() {
     dispatch("LOGOUT");
   };
 
-  console.log(user, " usershu");
   return (
     <div className="px-10 py-3 border-b border-gray-200">
       <div className="flex items-center justify-between h-10">
