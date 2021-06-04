@@ -76,7 +76,7 @@ function Home({ categories }) {
             </h1>
           </div>
         </div>
-        <div className="container flex items-center gap-5 px-2 mx-auto mt-8 text-gray-800 justify-items-start">
+        <div className="container flex items-center gap-5 px-2 mx-auto mt-8 overflow-x-auto text-gray-800 justify-items-start">
           <Link href="/campaigns">
             <a className="text-base font-semibold text-gray-800 ">
               Бүгд
@@ -85,6 +85,7 @@ function Home({ categories }) {
           {categories.map((category) => (
            <CategoryMenu category={category}/>
           ))}
+          
         </div>
         <div className="grid flex-wrap grid-cols-1 gap-5 px-2 pb-5 mx-auto mt-8 lg:container sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4">
           {isInitialLoading && (

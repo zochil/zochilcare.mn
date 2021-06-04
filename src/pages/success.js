@@ -35,7 +35,7 @@ const PM_MAP = {
 function Success({isMobile}) {
 
   const { user, item, donationResult,authenticated, loading } = useAuthState();
-  console.log(donationResult, " hey");
+
   if (loading) {
     return (
       <div className="flex items-center justify-center w-full h-screen mx-auto bg-gray-100">

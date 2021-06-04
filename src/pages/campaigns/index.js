@@ -14,12 +14,12 @@ const {
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 function index({ categories, campaigns }) {
-  console.log(campaigns);
+ 
 
   return (
     <div>
       <Head>
-        <title>Crowdfund</title>
+        <title>Dusal</title>
       </Head>
       <div>
         <div className="w-full h-40 bg-gradient-to-bl from-blue-100 via-blue-500 to-blue-300">

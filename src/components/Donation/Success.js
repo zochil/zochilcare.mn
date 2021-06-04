@@ -19,7 +19,6 @@ function Success({ isMobile,donationResult }) {
   const {  loading } = useAuthState();
 
   
-  console.log(donationResult);
   if (loading) {
     return (
       <div className="flex items-center justify-center w-full h-screen mx-auto bg-gray-100">

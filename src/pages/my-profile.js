@@ -62,7 +62,7 @@ function MyProfile() {
   return (
     <div>
       <Head>
-        <title>Crowdfund</title>
+        <title>Dusal</title>
       </Head>
       {authenticated && (
         <div className="container py-10 mx-auto">

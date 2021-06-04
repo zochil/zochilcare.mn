@@ -4,7 +4,7 @@ import classNames from "classnames";
 
 function DonationList({ donation,key }) {
   const { full_name, amount, created_at, message, status } = donation;
-  console.log(created_at);
+
   return (
     <div key={key} className="flex flex-wrap items-center justify-between px-4 py-2 mt-5 text-sm bg-white rounded-lg shadow cursor-pointer dark:bg-gray-600">
 

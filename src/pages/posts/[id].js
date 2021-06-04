@@ -3,7 +3,7 @@ import axios from "axios";
 import Head from "next/head";
 
 function id({ post }) {
-  console.log(post);
+  
   return (
     <div>
       <Head>

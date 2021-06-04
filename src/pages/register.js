@@ -42,7 +42,7 @@ function Register() {
   return (
     <div className="flex items-center justify-center min-h-screen px-4 bg-gray-50 sm:px-6 lg:px-8">
       <Head>
-        <title>Burtguuleh</title>
+        <title>Бүртгүүлэх</title>
       </Head>
       <div className="w-full max-w-md space-y-8">
         <div>
