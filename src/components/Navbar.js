@@ -12,7 +12,7 @@ function Navbar() {
   };
 
   return (
-    <div className="px-10 py-3 border-b border-gray-200">
+    <div className="px-3 py-3 border-b border-gray-200 md:px-10">
       <div className="flex items-center justify-between h-10">
         <div className="flex items-center">
           <Link href="/">
@@ -22,7 +22,7 @@ function Navbar() {
             </a>
           </Link>
         </div>
-        <div className="flex">
+        <div className="flex hidden md:block">
           <nav>
             <ul className="flex gap-8 text-sm font-semibold text-gray-800">
               <li className="hover:text-blue-600">
@@ -77,6 +77,32 @@ function Navbar() {
             ))}
         </div>
       </div>
+      <div className="flex-wrap w-full px-1 pt-3 justify-items-center md:hidden">
+          <nav>
+            <ul className="flex gap-8 text-sm font-semibold text-gray-800">
+              <li className="hover:text-blue-600">
+                <Link href="/">
+                  <a>Нүүр</a>
+                </Link>
+              </li>
+              <li className="hover:text-blue-600">
+                <Link href="/campaigns">
+                  <a>Төслүүд</a>
+                </Link>
+              </li>
+              <li className="hover:text-blue-600">
+                <Link href="/posts">
+                  <a>Мэдээ</a>
+                </Link>
+              </li>
+              <li className="hover:text-blue-600">
+                <Link href="/contact">
+                  <a>Холбоо барих</a>
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
     </div>
   );
 }

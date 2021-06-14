@@ -12,17 +12,19 @@ import { useAuthDispatch, useAuthState } from "../../../context/auth";
 import Breadcrumb from "../../../components/Breadcrumb";
 import * as storage from "../../../lib/storage";
 
-function Campaign({ campaign, donations,key }) {
+function Campaign({ campaign, donations, key }) {
   const [amount, setAmount] = useState(0);
 
   const dispatch = useAuthDispatch();
   const { authenticated } = useAuthState();
-  
+
   function onAddToItem() {
     const item = pick(campaign, ["id", "title", "image"]);
-    storage.setItem("item", item,true);
+    storage.setItem("item", item, true);
     dispatch("DONATE", item);
-    !authenticated ? Router.push("/login") : Router.push({ pathname: '/make-donation',query: { amount:amount }});
+    !authenticated
+      ? Router.push("/login")
+      : Router.push({ pathname: "/make-donation", query: { amount: amount } });
   }
   return (
     <div>
@@ -37,7 +39,7 @@ function Campaign({ campaign, donations,key }) {
             // { title: (category || {}).name, url: `/campaign/${(category || {}).id}` },
           ]}
         />
-        <div className="flex" key={key}>
+        <div className="flex flex-wrap px-3 md:px-0" key={key}>
           <div className="md:w-1/2 md:pr-5">
             <img src={campaign.image} />
           </div>
@@ -48,7 +50,6 @@ function Campaign({ campaign, donations,key }) {
             <h3 className="mb-4 text-2xl font-bold">{campaign.title}</h3>
             <div className="text-sm font-semibold text-gray-500">
               <p className="h-16 truncate whitespace-normal">
-                {" "}
                 {campaign.summary}
               </p>
             </div>
@@ -170,9 +171,10 @@ function Campaign({ campaign, donations,key }) {
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
                   />{" "}
-                  <button 
-                  onClick={()=> onAddToItem()}
-                  className="px-6 py-3 text-lg leading-5 rounded shadow blue button">
+                  <button
+                    onClick={() => onAddToItem()}
+                    className="px-6 py-3 text-lg leading-5 rounded shadow blue button"
+                  >
                     Хандив өгөх
                   </button>
                 </div>
@@ -180,10 +182,8 @@ function Campaign({ campaign, donations,key }) {
             </div>
           </div>
         </div>
-        <div className="flex mt-5">
-          <Tabs
-           
-          >
+        <div className="flex px-3 mt-5 md:px-0">
+          <Tabs>
             <TabList className="font-bold">
               <Tab>Танилцуулга</Tab>
               <Tab>Хандивлагч</Tab>
@@ -198,7 +198,7 @@ function Campaign({ campaign, donations,key }) {
             </TabPanel>
             <TabPanel>
               <div className="text-gray-600 w-fll ">
-                {donations.map((donation,key) => (
+                {donations.map((donation, key) => (
                   <DonationList donation={donation} key={key} />
                 ))}
               </div>

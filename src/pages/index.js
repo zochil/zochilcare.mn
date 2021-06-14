@@ -70,7 +70,7 @@ function Home({ categories }) {
       </Head>
       <div>
         <div className="w-full h-40 bg-gradient-to-bl from-blue-100 via-blue-500 to-blue-300">
-          <div className="flex flex-col items-center justify-center w-full h-full">
+          <div className="flex flex-col items-center justify-center w-full h-full px-5 md:px-0">
             <h1 className="text-2xl font-bold text-white transition duration-500 transform hover:scale-110">
               Хамтдаа сайн сайхан ирээдүйг бий болгоё
             </h1>
