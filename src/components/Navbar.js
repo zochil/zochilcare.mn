@@ -12,10 +12,12 @@ function Navbar() {
   };
 
   return (
-    <div className="flex items-center justify-center w-full px-3 py-3 mx-auto border-b border-gray-200 md:px-10">
+    <div className="flex items-center justify-center w-full px-3 py-3 mx-auto border-2 border-b md:px-10">
       <Link href="/">
+        
         <a>
-          ZochilCare ❤️
+          <img src="/images/logo.png" className="object-contain h-10 mr-2 w-30"/>
+          
         </a>
       </Link>
     </div>

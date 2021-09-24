@@ -60,13 +60,13 @@ function Campaign({ campaign, donations, key }) {
       <Head>
         <title>{campaign && campaign.title}</title>
       </Head>
-      <div className="container mx-auto my-1">
+      <div className="container mx-auto my-10">
         <div className="flex mb-5 md:hidden">
           <img className="w-full" src={campaign.image} />
         </div>
         <div className="flex flex-wrap px-3 md:px-0" key={key}>
           <div className="hidden md:block md:w-1/2 md:pr-5">
-            <img src={campaign.image} />
+            <img className="w-full" src={campaign.image} />
           </div>
 
           <div className="md:w-1/2 md:pl-5">
@@ -78,21 +78,31 @@ function Campaign({ campaign, donations, key }) {
             </div>
             <div className="mt-4">
               <div className="flex justify-between">
-                {" "}
                 <div className="flex gap-1 process-pledged">
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-</svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                    />
+                  </svg>
                   <span className="font-bold text-gray-800">
                     {campaign.donation_count}
                   </span>{" "}
-                  <span className="text-green-500">xандив</span>
+                  
                 </div>
                 <div className="process-funded">
                   <span className="font-bold text-gray-800">
                     {Math.ceil((campaign.raised * 100) / campaign.goal)}%
                   </span>{" "}
-                  цугларсан
+                  
                 </div>
               </div>
 
@@ -107,21 +117,26 @@ function Campaign({ campaign, donations, key }) {
                   ></div>
                 </div>
               </div>
-              <div className="flex gap-5 mt-5 leading-5 text-gray-500">
+              <div className="flex justify-between gap-5 mt-5 leading-5 text-gray-500">
+              <div className="process-funded">
+                  <span className="font-bold text-gray-800"  style={{
+                    color: "#7647ea"
+                  }}>
+                    {numeral(campaign.raised).format("0,0")}
+                  </span>{" "}
+                  цугларсан
+                </div>
                 <div className="process-pledged">
-                  <span className="font-bold text-gray-800">
+                  <span className="font-bold text-gray-800" 
+                 
+                  >
                     {" "}
                     {numeral(campaign.goal).format("0,0")}₮
                   </span>{" "}
                   зорилт
                 </div>
 
-                <div className="process-funded">
-                  <span className="font-bold text-gray-800">
-                    {numeral(campaign.raised).format("0,0")}
-                  </span>{" "}
-                  цугларсан
-                </div>
+               
               </div>
               <div className="mt-10">
                 <p className="mb-2 font-bold">
@@ -129,15 +144,6 @@ function Campaign({ campaign, donations, key }) {
                   <span className="text-blue-600">{amount}₮</span>
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  <button
-                    onClick={() => setAmount(1000)}
-                    className="donation-button"
-                  >
-                    <bdi>
-                      1000
-                      <span>₮</span>
-                    </bdi>
-                  </button>
                   <button
                     onClick={() => setAmount(5000)}
                     className="donation-button"
@@ -202,7 +208,16 @@ function Campaign({ campaign, donations, key }) {
                   />{" "}
                   <button
                     onClick={() => onAddToItem()}
-                    className="px-6 py-3 text-lg leading-5 text-white rounded shadow button"
+                    className="block w-full px-6 py-3 mt-3 text-lg leading-5 text-white rounded shadow md:hidden button"
+                    style={{
+                      backgroundColor: "#7647ea",
+                    }}
+                  >
+                    Хандив өгөх
+                  </button>
+                  <button
+                    onClick={() => onAddToItem()}
+                    className="hidden px-6 py-3 text-lg leading-5 text-white rounded shadow md:block button"
                     style={{
                       backgroundColor: "#7647ea",
                     }}
@@ -230,7 +245,7 @@ function Campaign({ campaign, donations, key }) {
           </Tabs>
         </div>
       </div>
-      ) }
+      ) 
     </div>
   );
 }

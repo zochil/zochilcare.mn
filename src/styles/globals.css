@@ -18,10 +18,11 @@
     @apply px-2 py-1 text-sm leading-5 text-gray-800 border rounded shadow;
   }
   .donation-button:hover{
-    @apply hover:border-blue-100;
+    
   }
   .donation-button:focus{
-    @apply focus:outline-none focus:border-blue-100;
+    @apply focus:outline-none;
+    border-color:#7647ea;
   }
  
 }
@@ -48,7 +49,7 @@ a {
 }
 .react-tabs__tab--selected {
   border: none !important;
-  border-bottom: 2px solid #3867d6 !important;
+  border-bottom: 2px solid #7647ea !important;
 }
 
 /* Make clicks pass-through */
@@ -131,4 +132,12 @@ a {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.first-color {
+  --tw-gradient-from: #6e86a3;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(52, 211, 153, 0));
+}
+.second-color{
+  --tw-gradient-to: #332a3e;
 }
