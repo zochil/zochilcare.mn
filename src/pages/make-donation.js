@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import LoginComponent from "../components/Login";
 import Skeleton from "react-loading-skeleton";
+import Head from "next/head";
 
 function MakeDonation() {
   const { loading, authenticated } = useAuthState();
@@ -22,11 +23,16 @@ function MakeDonation() {
     );
   }
   return (
+    <>
+      <Head>
+        <title>Donate</title>
+      </Head>
     <div className="flex items-center justify-center mx-auto bg-gray-100 ">
      
-      {!!authenticated && <MakeDonationComponent />}
-      {!authenticated && <LoginComponent/>}
+      <MakeDonationComponent />
+      
     </div>
+    </>
   );
 }
 

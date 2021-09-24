@@ -38,32 +38,23 @@ const DEEP_LINKS_MAP = {
   "Candy Pay": "candy",
 };
 function MakeDonationComponent({ isMobile }) {
-  const { user, item, donationResult,authenticated,loading } = useAuthState();
+  const { user, item, donationResult, authenticated, loading } = useAuthState();
   const dispatch = useAuthDispatch();
-  
+
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
       amount: router.query.amount,
       campaign_id: item.id,
-      payment_method: "",
-      phone: user.phone,
+      payment_method: "qpay",
+      phone: "",
       message: "",
     },
     onSubmit: async (values) => {
       try {
-        const accessToken = await storage.getItem("access_token");
-        const res = await Axios.post(
-          "/donations/make-donation",
-          {
-            ...values,
-          },
-          {
-            headers: {
-              "access-token": accessToken,
-            },
-          }
-        );
+        const res = await Axios.post("/donations/make-donation", {
+          ...values,
+        });
         storage.setItem("donation_result", JSON.stringify(res.data));
         dispatch("DONATE_COMPLETE", res.data);
         router.push("/success");
@@ -76,19 +67,33 @@ function MakeDonationComponent({ isMobile }) {
   return (
     <div>
       <div className="leading-loose">
-          {authenticated && <form
-          className="max-w-xl p-10 m-4 bg-white rounded shadow-xl"
+        <form
+          className="max-w-xl m-4 bg-white rounded shadow-xl p-7"
           onSubmit={formik.handleSubmit}
         >
-          <p className="font-medium text-gray-800">Хандивлагч</p>
-          <div className className="flex">
-            <h2 className="w-full text-base font-semibold">
-              {(user && !!user.first_name) || <Skeleton />}
-            </h2>
-            <span className="font-semibold">
-              {" "}
-              {(user && !!user.phone) || <Skeleton />}
-            </span>
+          <p className="mb-5 font-bold text-gray-800">Хандивлагч</p>
+          <div className className="flex flex-wrap gap-4 ">
+            <input
+              className="w-full px-2 py-2 text-gray-700 bg-gray-100 rounded"
+              id="full_name"
+              name="full_name"
+              type="text"
+              required
+              placeholder="Бүтэн нэр"
+              onChange={formik.handleChange}
+              value={formik.values.full_name}
+            />
+
+            <input
+              className="w-full px-2 py-2 text-gray-700 bg-gray-100 rounded"
+              id="phone"
+              name="phone"
+              type="phone"
+              required
+              placeholder="Утасны дугаар"
+              onChange={formik.handleChange}
+              value={formik.values.phone}
+            />
           </div>
           <div className="mt-4">
             <div className="flex">
@@ -99,7 +104,7 @@ function MakeDonationComponent({ isMobile }) {
                 />
               )) || <Skeleton />}
               <div className="pl-2">
-                <h2 className="font-semibold truncate">
+                <h2 className="font-semibold">
                   {(item && item.title) || <Skeleton />}
                 </h2>
 
@@ -128,39 +133,17 @@ function MakeDonationComponent({ isMobile }) {
               value={formik.values.message}
             />
           </div>
-          <p className="mt-4 font-medium text-gray-800">Төлбөрийн хэрэгсэл</p>
-          <ul className="flex flex-wrap">
-            {Object.keys(PM_MAP).map((method) => (
-              <li className="list-none">
-                <input
-                  type="radio"
-                  className="input-radio"
-                  onChange={formik.handleChange}
-                  name="payment_method"
-                  checked={formik.values.payment_method === PM_MAP[method]}
-                  value={PM_MAP[method]}
-                />
-
-                <label className="pl-2">{PM_MAP[method]} </label>
-                <div className="payment_box payment_method_bacs">
-                  <img
-                    className=""
-                    src={`/images/banks/${PM_MAP[method]}.jpg`}
-                  />
-                </div>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-4">
-            <button
-              className="px-4 py-1 font-light tracking-wider text-white bg-gray-900 rounded"
-              type="submit"
-            >
-              {loading && <p>loading</p> } Хандив өгөх
-            </button>
+         
+          <button
+            className="w-full px-4 py-1 font-light tracking-wider text-white bg-green-700 rounded"
+            type="submit"
+          >
+            {loading && <p>loading</p>} Хандив өгөх ❤️
+          </button>
+          <div className="mt-5 text-xs">
+          Сайн үйлс дэлгэрэх болтугай
           </div>
-        </form> }
-        
+        </form>
       </div>
     </div>
   );

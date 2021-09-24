@@ -1,41 +1,48 @@
-import React from 'react'
+import React,{useState,useEffect} from "react";
 import QRCode from "qrcode.react";
 import withSizes from "react-sizes";
 import { useAuthDispatch, useAuthState } from "../context/auth";
-import LoginComponent from "../components/Login"
-import SuccessComponent from "../components/Donation/Success"
+import LoginComponent from "../components/Login";
+import SuccessComponent from "../components/Donation/Success";
 import Skeleton from "react-loading-skeleton";
+import { useRouter } from "next/router";
 const PM_MAP = {
-    qpay: "qpay",
-    // lend: "LendMN",
-    // candy: "CandyPay",
-    // socialpay: "socialpay",
-    // mostmoney: "Most Money",
-    // khan: "Хаан банк",
-    // golomt: "Голомт банк",
-    // state: "Төрийн банк",
-    // tdb: "ХХБ",
-    // xac: "Хас Банк",
-    // ubcity: "Улаанбаатар хотын банк",
-    // capitron: "Капитрон банк",
-    // arig: "Ариг банк",
-  };
+  qpay: "qpay",
+  // lend: "LendMN",
+  // candy: "CandyPay",
+  // socialpay: "socialpay",
+  // mostmoney: "Most Money",
+  // khan: "Хаан банк",
+  // golomt: "Голомт банк",
+  // state: "Төрийн банк",
+  // tdb: "ХХБ",
+  // xac: "Хас Банк",
+  // ubcity: "Улаанбаатар хотын банк",
+  // capitron: "Капитрон банк",
+  // arig: "Ариг банк",
+};
+
+const DEEP_LINKS_MAP = {
+  "Khan bank": "khan",
+  "State bank": "state",
+  "Trade and Development bank": "tdb",
+  "Xac bank": "xac",
+  "Most money": "mostmoney",
+  "Ulaanbaatar city bank": "ubcity",
+  "Capitron bank": "capitron",
+  "Candy Pay": "candy",
+};
+
+function Success({ isMobile }) {
+  const [Result, setResult] = useState()
+  const { user, item, donationResult, authenticated, loading } = useAuthState();
+  useEffect(() => {
+
+    const result = typeof window !== 'undefined' ? localStorage.getItem('zochil_donation_result') : null
+    setResult(JSON.parse(result))
+  }, [])
   
-  const DEEP_LINKS_MAP = {
-    "Khan bank": "khan",
-    "State bank": "state",
-    "Trade and Development bank": "tdb",
-    "Xac bank": "xac",
-    "Most money": "mostmoney",
-    "Ulaanbaatar city bank": "ubcity",
-    "Capitron bank": "capitron",
-    "Candy Pay": "candy",
-  };
-
-function Success({isMobile}) {
-
-  const { user, item, donationResult,authenticated, loading } = useAuthState();
-
+  const Router = useRouter();
   if (loading) {
     return (
       <div className="flex items-center justify-center w-full h-screen mx-auto bg-gray-100">
@@ -49,12 +56,13 @@ function Success({isMobile}) {
       </div>
     );
   }
-    return (
-      <div className="flex items-center justify-center mx-auto bg-gray-100 ">
-  
-      <SuccessComponent donationResult={donationResult} />
+
+  return (
+    <div className="flex items-center justify-center mx-auto bg-gray-100 ">
+      
+      {Result && <SuccessComponent donationResult={Result} />}
     </div>
-    )
+  );
 }
 
 export default withSizes(({ width }) => ({

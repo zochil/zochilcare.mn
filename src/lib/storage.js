@@ -30,6 +30,7 @@ export async function setItem(key, rawValue, haveToStringify = false) {
   }
 
   window.localStorage.setItem(`${STORAGE_PREFIX}_${key}`, value);
+  
 }
 
 export async function removeItem(key) {

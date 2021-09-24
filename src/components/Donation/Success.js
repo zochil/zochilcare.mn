@@ -4,16 +4,7 @@ import withSizes from "react-sizes";
 import * as storage from "../../../src/lib/storage";
 import QRCode from "qrcode.react";
 import Skeleton from "react-loading-skeleton";
-const DEEP_LINKS_MAP = {
-  "Khan bank": "khan",
-  "State bank": "state",
-  "Trade and Development bank": "tdb",
-  "Xac bank": "xac",
-  "Most money": "mostmoney",
-  "Ulaanbaatar city bank": "ubcity",
-  "Capitron bank": "capitron",
-  "Candy Pay": "candy",
-};
+
 function Success({ isMobile,donationResult }) {
   const [Result, setResult] = useState();
   const {  loading } = useAuthState();
@@ -32,6 +23,7 @@ function Success({ isMobile,donationResult }) {
       </div>
     );
   }
+  // console.log(campaign.deeplink);
   return (
     <div>
       <div className="my-20 leading-loose">
@@ -39,7 +31,7 @@ function Success({ isMobile,donationResult }) {
           <div className="max-w-xl p-10 m-4 bg-white rounded shadow-xl ">
             <p className="font-semibold text-center text-gray-800">
               {" "}
-              Баярлалаа. Та шилжүүлэг ээ хийнэ үү.
+              Баярлалаа та доорх QR код уншуулан хандиваа өгнө үү. Та шилжүүлэг ээ хийнэ үү.
             </p>
             <div className className="flex">
               <h2 className="w-full text-base font-semibold">
@@ -67,17 +59,15 @@ function Success({ isMobile,donationResult }) {
                   </li>
                 )}
                 {isMobile && (
-                  <ul className="flex flex-wrap order-deeplinks list-group">
+                  <ul className="flex grid flex-wrap grid-cols-3 gap-5 order-deeplinks list-group">
                     {(donationResult.invoice.deeplinks || [])
-                      .filter((deeplink) => DEEP_LINKS_MAP[deeplink.name])
                       .map((deeplink) => (
                         <li className="list-group-item">
                           <a href={deeplink.link}>
                             <img
                               alt={deeplink.name}
-                              src={`/images/banks/${
-                                DEEP_LINKS_MAP[deeplink.name]
-                              }.jpg`}
+                              src={deeplink.logo}
+                              className="w-full rounded-2xl"
                             />
                           </a>
                         </li>

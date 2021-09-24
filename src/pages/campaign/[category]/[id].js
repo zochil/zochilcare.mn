@@ -26,6 +26,7 @@ function Campaign({ campaign, donations, key }) {
       ? Router.push("/login")
       : Router.push({ pathname: "/make-donation", query: { amount: amount } });
   }
+  console.log(campaign);
   return (
     <div>
       <Head>
@@ -88,6 +89,7 @@ function Campaign({ campaign, donations, key }) {
                   цугларсан
                 </div>
                 <div className="font-bold text-gray-800">
+               
                   {moment(campaign.created_at)
                     .locale("mn")
                     .startOf("day")

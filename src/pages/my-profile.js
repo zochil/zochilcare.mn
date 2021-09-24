@@ -58,7 +58,7 @@ function MyProfile() {
           ))}
       </div>
     );
-
+            console.log(user);
   return (
     <div>
       <Head>
