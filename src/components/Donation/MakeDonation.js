@@ -38,9 +38,9 @@ const DEEP_LINKS_MAP = {
   "Candy Pay": "candy",
 };
 function MakeDonationComponent({ isMobile }) {
-  const { user, item, donationResult, authenticated, loading } = useAuthState();
+  const { user, item, donationResult, authenticated } = useAuthState();
   const dispatch = useAuthDispatch();
-
+const [loading, setloading] = useState(false)
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -52,12 +52,15 @@ function MakeDonationComponent({ isMobile }) {
     },
     onSubmit: async (values) => {
       try {
+        setloading(true)
         const res = await Axios.post("/donations/make-donation", {
           ...values,
         });
         storage.setItem("donation_result", JSON.stringify(res.data));
         dispatch("DONATE_COMPLETE", res.data);
         router.push("/success");
+        
+
       } catch (error) {
         console.log(error);
       }
@@ -138,7 +141,7 @@ function MakeDonationComponent({ isMobile }) {
             className="w-full px-4 py-1 font-light tracking-wider text-white bg-green-700 rounded"
             type="submit"
           >
-            {loading && <p>loading</p>} Хандив өгөх ❤️
+            {loading ? <p>Уншиж байна...</p> :  "Хандив өгөх ❤️" }
           </button>
           <div className="mt-5 text-xs">
           Сайн үйлс дэлгэрэх болтугай

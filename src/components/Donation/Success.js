@@ -32,13 +32,13 @@ function Success({ isMobile,donationResult }) {
       }
       
 
-    }, 5000)
+    }, 3000)
 
     return () => clearInterval(intervalId); //This is important
 
   }, [invoiceNo])
 
-  console.log(Result);
+  
   if(Result && Result.success === true){
     router.push("/")
   }
