@@ -11,14 +11,15 @@ import DonationList from "../components/Donation/DonationList";
 import { useAuthDispatch, useAuthState } from "../context/auth";
 import Breadcrumb from "../components/Breadcrumb";
 import * as storage from "../lib/storage";
+import getConfig from "next/config";
+const {
+  publicRuntimeConfig: { API_URL },
+} = getConfig();
 
 function Campaign({ campaign, donations, key }) {
   const [amount, setAmount] = useState("");
-  const [state, setState] = useState({
-    data: null,
-    error: false,
-    loading: true,
-  });
+  const [invoiceNo, setinvoiceNo] = useState();
+  
 
   const dispatch = useAuthDispatch();
   const { authenticated } = useAuthState();
@@ -36,30 +37,27 @@ function Campaign({ campaign, donations, key }) {
       Router.push({ pathname: "/make-donation", query: { amount: amount } });
     }
   }
+ 
+  useEffect(() => {
+    const intervalId = setInterval(async() => {  //assign interval to a variable to clear it.
+      
+      const result = await storage.getItem("donation_result");
+      
+      setinvoiceNo(JSON.parse(result))
+      if (invoiceNo){
+        const verifyUrl = await axios.get(`${API_URL}/invoices/webhook/qpay?invoiceid=${invoiceNo.invoice.invoiceno}`);
+        // const verified = await verifyUrl.data;
+        
+        console.log(verifyUrl);
+      }
+      
 
-  // useEffect(async () => {
-  //   const campaignUrl = await axios.get(`/campaigns/detail/50`);
-  //   const campaign = await campaignUrl.data;
+    }, 5000)
 
-  //   const donationUrl = await axios.get(`/donations/list?campaign_id=50`);
-  //   const donations = await donationUrl.data;
-  // }, []);
+    return () => clearInterval(intervalId); //This is important
 
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {  //assign interval to a variable to clear it.
-  //     setState(state => ({ data: state.data, error: false, loading: true }))
-  //     axios.get(url)
-  //      .then(newData => setState({ data: newData.data, error: false, loading: false }))
-  //      .catch(function(error) {
-  //         console.log(error)
-  //         setState({ data: null, error: true, loading: false })
-  //      })
-  //   }, 5000)
-
-  //   return () => clearInterval(intervalId); //This is important
-
-  // }, [url, useState])
-  console.log(campaign, "wtf");
+  }, [invoiceNo])
+  
 
   return (
     <div>

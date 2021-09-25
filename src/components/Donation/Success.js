@@ -4,12 +4,45 @@ import withSizes from "react-sizes";
 import * as storage from "../../../src/lib/storage";
 import QRCode from "qrcode.react";
 import Skeleton from "react-loading-skeleton";
-
+import axios from "axios";
+import getConfig from "next/config";
+import { useRouter } from "next/router";
+const {
+  publicRuntimeConfig: { API_URL },
+} = getConfig();
 function Success({ isMobile,donationResult }) {
   const [Result, setResult] = useState();
   const {  loading } = useAuthState();
 
-  
+  const [invoiceNo, setinvoiceNo] = useState();
+
+  const router = useRouter()
+
+  useEffect(() => {
+    const intervalId = setInterval(async() => {  //assign interval to a variable to clear it.
+      
+      const result = await storage.getItem("donation_result");
+      
+      setinvoiceNo(JSON.parse(result))
+      if (invoiceNo){
+        const verifyUrl = await axios.get(`${API_URL}/invoices/webhook/qpay?invoiceid=${invoiceNo.invoice.invoiceno}`);
+        const verifiedData = await verifyUrl.data;
+        
+        setResult(verifiedData)
+      }
+      
+
+    }, 5000)
+
+    return () => clearInterval(intervalId); //This is important
+
+  }, [invoiceNo])
+
+  console.log(Result);
+  if(Result && Result.success === true){
+    router.push("/")
+  }
+
   if (loading) {
     return (
       <div className="flex items-center justify-center w-full h-screen mx-auto bg-gray-100">
