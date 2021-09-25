@@ -77,7 +77,7 @@ function Campaign({ campaign, donations, key }) {
           nonce="ezsUtt38"
         />
       </Head>
-      <div className="container mx-auto">
+      <div className="container mx-auto md:my-10">
         <div className="flex mb-5 md:hidden">
           <img className="w-full" src={campaign.image} />
         </div>
