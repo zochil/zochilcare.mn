@@ -69,7 +69,7 @@ function Campaign({ campaign, donations, key }) {
         <meta property="og:title" content={campaign.title} />
 
         <meta property="og:site_name" content={campaign.name} />
-        <meta property="og:url" content={`https://zochilcare.zochil.shop`} />
+        <meta property="og:url" content={`https://lilthuge.zochilcare.mn`} />
         <meta property="og:image" content={campaign.image} />
         <script
           async
@@ -79,7 +79,7 @@ function Campaign({ campaign, donations, key }) {
           nonce="ezsUtt38"
         />
       </Head>
-      <div className="container mx-auto my-10">
+      <div className="container mx-auto">
         <div className="flex mb-5 md:hidden">
           <img className="w-full" src={campaign.image} />
         </div>
@@ -245,7 +245,7 @@ function Campaign({ campaign, donations, key }) {
 
                   <button
                     onClick={() => onAddToItem()}
-                    className="flex items-center w-full px-6 py-3 text-lg leading-5 text-white rounded shadow md:w-48 button"
+                    className="flex items-center justify-center w-full px-6 py-3 text-lg leading-5 text-center text-white rounded shadow md:w-48 button"
                     style={{
                       backgroundColor: "#7647ea",
                     }}

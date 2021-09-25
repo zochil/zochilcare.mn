@@ -16,6 +16,7 @@
   }
   .donation-button{
     @apply px-2 py-1 text-sm leading-5 text-gray-800 border rounded shadow;
+    margin: 4px;
   }
   .donation-button:hover{
     
