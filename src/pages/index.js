@@ -97,7 +97,7 @@ function Campaign({ campaign, donations, key }) {
               >
                 <a
                   target="_blank"
-                  href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fzochilcare.zochil.shop%2F&amp;src=sdkpreparse"
+                  href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flilthuge.zochilcare.mn%2F&amp;src=sdkpreparse"
                   class="fb-xfbml-parse-ignore"
                 >
                   Share
