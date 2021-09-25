@@ -91,7 +91,7 @@ function Campaign({ campaign, donations, key }) {
               <h3 className="mb-4 text-2xl font-bold">{campaign.title}</h3>
               <div
                 className="fb-share-button "
-                data-href="https://zochilcare.zochil.shop/"
+                data-href="https://lilthuge.zochilcare.mn"
                 data-layout="button_count"
                 data-size="large"
               >
