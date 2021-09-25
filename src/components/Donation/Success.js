@@ -64,7 +64,11 @@ function Success({ isMobile,donationResult }) {
           <div className="max-w-xl p-10 m-4 bg-white rounded shadow-xl ">
             <p className="font-semibold text-center text-gray-800">
               {" "}
-              Баярлалаа та доорх QR код уншуулан хандиваа өгнө үү. Та шилжүүлэг ээ хийнэ үү.
+              {isMobile &&
+                          "Та өөрийн ашигладаг банкны аппликэйшний зурагтай товч дээр дарж төлбөрөө төлнө үү."}
+                        {!isMobile &&
+                          "Та өөрийн ашигладаг банкны аппликэйшний QPay гэсэн хэсэг рүү орж зүүн талын QR кодыг уншуулан төлбөрөө төлнө үү."}
+             
             </p>
             <div className className="flex">
               <h2 className="w-full text-base font-semibold">

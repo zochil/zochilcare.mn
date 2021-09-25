@@ -141,7 +141,7 @@ function Campaign({ campaign, donations, key }) {
                       color: "#7647ea",
                     }}
                   >
-                    {numeral(campaign.raised).format("0,0")}
+                    {numeral(campaign.raised).format("0,0")}₮
                   </span>{" "}
                   цугларсан
                 </div>
