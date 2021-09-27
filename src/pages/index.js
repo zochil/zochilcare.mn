@@ -264,7 +264,7 @@ function Campaign({ campaign, donations, key }) {
         <div className="flex px-3 mt-5 md:px-0">
           <Tabs>
             <TabList className="font-bold">
-              <Tab>Танилцуулга</Tab>
+              <Tab>Г.Төгөлдөрийн цусны цочмог хорт хавдарын эсрэг аян</Tab>
             </TabList>
 
             <TabPanel>
