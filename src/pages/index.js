@@ -90,8 +90,10 @@ function Campaign({ campaign, donations, key }) {
           <div className="md:w-1/2 md:pl-5">
             <div className="flex justify-between ">
               <h3 className="mb-4 text-2xl font-bold">{campaign.title}</h3>
-              <div
-                className="fb-share-button "
+             
+            </div>
+            <div
+                className="my-2 fb-share-button"
                 data-href="https://lilthuge.zochilcare.mn"
                 data-layout="button_count"
                 data-size="large"
@@ -104,7 +106,6 @@ function Campaign({ campaign, donations, key }) {
                   Share
                 </a>
               </div>
-            </div>
 
             <div className="text-sm font-semibold text-gray-500">
               <p className="h-16 truncate whitespace-normal">
