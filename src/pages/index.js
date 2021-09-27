@@ -163,6 +163,15 @@ function Campaign({ campaign, donations, key }) {
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <button
+                    onClick={() => setAmount(1000)}
+                    className="donation-button"
+                  >
+                    <bdi>
+                      1,000
+                      <span>₮</span>
+                    </bdi>
+                  </button>
+                  <button
                     onClick={() => setAmount(5000)}
                     className="donation-button"
                   >
