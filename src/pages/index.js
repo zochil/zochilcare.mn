@@ -57,7 +57,7 @@ function Campaign({ campaign, donations, key }) {
     return () => clearInterval(intervalId); //This is important
 
   }, [invoiceNo])
-  
+  console.log(campaign.image);
 
   return (
     <div>
@@ -65,6 +65,7 @@ function Campaign({ campaign, donations, key }) {
         <title>{campaign.title}</title>
         <meta name="description" content={campaign.title} />
         <meta property="og:title" content={campaign.title} />
+        <meta property="og:description" content={"ЭЛЭГ НЭГТ МОНГОЛЧУУДАА ХАНДИВЫН АЯНД НЭГДЭХИЙГ УРИАЛЖ БАЙНА."} />
 
         <meta property="og:site_name" content={campaign.name} />
         <meta property="og:url" content={`https://lilthuge.zochilcare.mn`} />
@@ -276,7 +277,7 @@ function Campaign({ campaign, donations, key }) {
           </Tabs>
         </div>
       </div>
-      )
+      
     </div>
   );
 }
