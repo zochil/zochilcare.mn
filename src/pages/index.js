@@ -86,13 +86,13 @@ function Campaign({ campaign, key }) {
             </div>
             <div
                 className="my-2 fb-share-button"
-                data-href="https://lilthuge.zochilcare.mn"
+                data-href={`https://${campaign.domain}`}
                 data-layout="button_count"
                 data-size="large"
               >
                 <a
                   target="_blank"
-                  href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flilthuge.zochilcare.mn%2F&amp;src=sdkpreparse"
+                  href={`https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2F${campaign.domain}%2F&amp;src=sdkpreparse`}
                   className="fb-xfbml-parse-ignore"
                 >
                   Share
