@@ -1,8 +1,7 @@
 import React,{useState,useEffect} from "react";
-import QRCode from "qrcode.react";
 import withSizes from "react-sizes";
-import { useAuthDispatch, useAuthState } from "../context/auth";
-import LoginComponent from "../components/Login";
+import { useAuthState } from "../context/auth";
+import MainLayout from "../components/MainLayout";
 import SuccessComponent from "../components/Donation/Success";
 import Skeleton from "react-loading-skeleton";
 import { useRouter } from "next/router";
@@ -34,15 +33,13 @@ const DEEP_LINKS_MAP = {
 };
 
 function Success({ isMobile }) {
+  const { loading } = useAuthState();
   const [Result, setResult] = useState()
-  const { user, item, donationResult, authenticated, loading } = useAuthState();
   useEffect(() => {
-
     const result = typeof window !== 'undefined' ? localStorage.getItem('zochil_donation_result') : null
     setResult(JSON.parse(result))
   }, [])
   
-  const Router = useRouter();
   if (loading) {
     return (
       <div className="flex items-center justify-center w-full h-screen mx-auto bg-gray-100">
@@ -59,12 +56,15 @@ function Success({ isMobile }) {
 
   return (
     <div className="flex items-center justify-center mx-auto bg-gray-100 ">
-      
       {Result && <SuccessComponent donationResult={Result} />}
     </div>
   );
 }
 
-export default withSizes(({ width }) => ({
+const SuccessWithSizes = withSizes(({ width }) => ({
   isMobile: width < 998,
 }))(Success);
+
+SuccessWithSizes.Layout = MainLayout;
+
+export default SuccessWithSizes;

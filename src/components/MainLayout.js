@@ -1,10 +1,10 @@
 import React from 'react'
 import Navbar from './Navbar'
 import Footer from './Footer'
-function MainLayout({children}) {
+function MainLayout({children, pageProps}) {
     return (
         <div>
-            <Navbar />
+            <Navbar logo={pageProps?.campaign?.logo || ""} />
             {children}
             <Footer/>
         </div>

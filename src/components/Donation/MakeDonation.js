@@ -38,9 +38,9 @@ const DEEP_LINKS_MAP = {
   "Candy Pay": "candy",
 };
 function MakeDonationComponent({ isMobile }) {
-  const { user, item, donationResult, authenticated } = useAuthState();
+  const { item } = useAuthState();
   const dispatch = useAuthDispatch();
-const [loading, setloading] = useState(false)
+  const [loading, setloading] = useState(false);
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -52,15 +52,13 @@ const [loading, setloading] = useState(false)
     },
     onSubmit: async (values) => {
       try {
-        setloading(true)
+        setloading(true);
         const res = await Axios.post("/donations/make-donation", {
           ...values,
         });
         storage.setItem("donation_result", JSON.stringify(res.data));
         dispatch("DONATE_COMPLETE", res.data);
         router.push("/success");
-        
-
       } catch (error) {
         console.log(error);
       }
@@ -75,7 +73,7 @@ const [loading, setloading] = useState(false)
           onSubmit={formik.handleSubmit}
         >
           <p className="mb-5 font-bold text-gray-800">Хандивлагч</p>
-          <div className className="flex flex-wrap gap-4 ">
+          <div className="flex flex-wrap gap-4 ">
             <input
               className="w-full px-2 py-2 text-gray-700 bg-gray-100 rounded"
               id="full_name"
@@ -136,16 +134,14 @@ const [loading, setloading] = useState(false)
               value={formik.values.message}
             />
           </div>
-         
+
           <button
             className="w-full px-4 py-1 font-light tracking-wider text-white bg-green-700 rounded"
             type="submit"
           >
-            {loading ? <p>Уншиж байна...</p> :  "Хандив өгөх ❤️" }
+            {loading ? <p>Уншиж байна...</p> : "Хандив өгөх ❤️"}
           </button>
-          <div className="mt-5 text-xs">
-          Сайн үйлс дэлгэрэх болтугай
-          </div>
+          <div className="mt-5 text-xs">Сайн үйлс дэлгэрэх болтугай</div>
         </form>
       </div>
     </div>

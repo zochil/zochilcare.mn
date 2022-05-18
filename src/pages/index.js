@@ -1,39 +1,33 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import Link from "next/link";
 import pick from "lodash/pick";
-import moment from "moment";
 import numeral from "numeral";
 import Router from "next/router";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import DonationList from "../components/Donation/DonationList";
-import { useAuthDispatch, useAuthState } from "../context/auth";
-import Breadcrumb from "../components/Breadcrumb";
-import * as storage from "../lib/storage";
 import getConfig from "next/config";
+import * as storage from "../lib/storage";
+import MainLayout from "../components/MainLayout";
+import { useAuthDispatch } from "../context/auth";
+import React, { useState, useEffect } from "react";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+
 const {
   publicRuntimeConfig: { API_URL },
 } = getConfig();
 
-function Campaign({ campaign, donations, key }) {
+function Campaign({ campaign, key }) {
   const [amount, setAmount] = useState("");
   const [invoiceNo, setinvoiceNo] = useState();
   
 
   const dispatch = useAuthDispatch();
-  const { authenticated } = useAuthState();
 
   function onAddToItem() {
-    const item = pick(campaign, ["id", "title", "image"]);
+    const item = pick(campaign, ["id", "title", "image", "logo"]);
     storage.setItem("item", item, true);
     dispatch("DONATE", item);
-    console.log(Router);
     if (!amount  ) {
-      
       window.alert("Хандивлах дүн оруулна уу.");
     } else {
-      
       Router.push({ pathname: "/make-donation", query: { amount: amount } });
     }
   }
@@ -73,7 +67,7 @@ function Campaign({ campaign, donations, key }) {
         <script
           async
           defer
-          crossorigin="anonymous"
+          crossOrigin="anonymous"
           src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0&appId=638416653249264&autoLogAppEvents=1"
           nonce="ezsUtt38"
         />
@@ -101,7 +95,7 @@ function Campaign({ campaign, donations, key }) {
                 <a
                   target="_blank"
                   href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flilthuge.zochilcare.mn%2F&amp;src=sdkpreparse"
-                  class="fb-xfbml-parse-ignore"
+                  className="fb-xfbml-parse-ignore"
                 >
                   Share
                 </a>
@@ -282,21 +276,16 @@ function Campaign({ campaign, donations, key }) {
     </div>
   );
 }
-export async function getServerSideProps(ctx) {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  const campaignUrl = await axios.get(`/campaigns/detail/50`);
-  const { campaign: campaign } = await campaignUrl.data;
 
-  const donationUrl = await axios.get(`/donations/list?campaign_id=50`);
-  const { donations: donations } = await donationUrl.data;
-  // By returning { props: posts }, the Blog component
-  // will receive `posts` as a prop at build time
+Campaign.Layout = MainLayout;
+
+export async function getServerSideProps(ctx) {
+  const domain = "magic.zochilcare.mn"
+  // const domain = ctx.req.get("host");
+  const { data: campaign } = await axios.get(`/campaigns/by-domain/${domain}`);
+  
   return {
-    props: {
-      campaign,
-      donations,
-    },
+    props: { campaign: campaign?.campaign || {} },
   };
 }
 

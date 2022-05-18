@@ -1,14 +1,12 @@
-import { useAuthDispatch, useAuthState } from "../context/auth";
-import withSizes from "react-sizes";
-import MakeDonationComponent from "../components/Donation/MakeDonation";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import LoginComponent from "../components/Login";
-import Skeleton from "react-loading-skeleton";
 import Head from "next/head";
+import withSizes from "react-sizes";
+import Skeleton from "react-loading-skeleton";
+import { useAuthState } from "../context/auth";
+import MainLayout from "../components/MainLayout";
+import MakeDonationComponent from "../components/Donation/MakeDonation";
 
 function MakeDonation() {
-  const { loading, authenticated } = useAuthState();
+  const { loading } = useAuthState();
   if (loading) {
     return (
       <div className="flex items-center justify-center w-full h-screen mx-auto bg-gray-100">
@@ -27,15 +25,17 @@ function MakeDonation() {
       <Head>
         <title>Donate</title>
       </Head>
-    <div className="flex items-center justify-center mx-auto bg-gray-100 ">
-     
-      <MakeDonationComponent />
-      
-    </div>
+      <div className="flex items-center justify-center mx-auto bg-gray-100 ">
+        <MakeDonationComponent />
+      </div>
     </>
   );
 }
 
-export default withSizes(({ width }) => ({
+const MakeDonationWithSizes = withSizes(({ width }) => ({
   isMobile: width < 998,
 }))(MakeDonation);
+
+MakeDonationWithSizes.Layout = MainLayout;
+
+export default MakeDonationWithSizes;
