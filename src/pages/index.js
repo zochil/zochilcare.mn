@@ -60,9 +60,7 @@ function Campaign({ campaign, key }) {
         <meta name="description" content={campaign.title} />
         <meta property="og:title" content={campaign.title} />
         <meta property="og:description" content={"ЭЛЭГ НЭГТ МОНГОЛЧУУДАА ХАНДИВЫН АЯНД НЭГДЭХИЙГ УРИАЛЖ БАЙНА."} />
-
-        <meta property="og:site_name" content={campaign.name} />
-        <meta property="og:url" content={`https://lilthuge.zochilcare.mn`} />
+        <meta property="og:url" content={`https://${campaign.domain}`} />
         <meta property="og:image" content={campaign.image} />
         <script
           async
@@ -259,7 +257,7 @@ function Campaign({ campaign, key }) {
         <div className="flex px-3 mt-5 md:px-0">
           <Tabs>
             <TabList className="font-bold">
-              <Tab>Г.Төгөлдөрийн цусны цочмог хорт хавдарын эсрэг аян</Tab>
+              <Tab>{ campaign.title }</Tab>
             </TabList>
 
             <TabPanel>
@@ -280,12 +278,20 @@ function Campaign({ campaign, key }) {
 Campaign.Layout = MainLayout;
 
 export async function getServerSideProps(ctx) {
-  const domain = "magic.zochilcare.mn"
-  // const domain = ctx.req.get("host");
-  const { data: campaign } = await axios.get(`/campaigns/by-domain/${domain}`);
-  
+  try {
+    const domain = ctx.req.headers.host;
+    const { data: campaign } = await axios.get(`/campaigns/by-domain/${domain}`);
+
+    return {
+      props: { campaign: campaign?.campaign || {} },
+    };
+  } catch(err) {
+    console.error(err);
+    console.log("RESPONSE: ",err.response?.data);
+  }
+
   return {
-    props: { campaign: campaign?.campaign || {} },
+    props: { campaign: {} },
   };
 }
 

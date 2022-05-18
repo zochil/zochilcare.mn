@@ -9,7 +9,7 @@ function Footer() {
           <div className="py-6 text-center sm:w-2/3">
             <p className="mb-2 text-sm font-bold ">
               
-              <a href="https://zochil.mn" >© 2021 Powered by Zochil</a></p>
+              <a href="https://zochil.mn" >© 2022 Powered by Zochil</a></p>
           </div>
         </div>
       </div>

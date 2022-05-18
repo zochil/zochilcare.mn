@@ -16,7 +16,7 @@ Router.events.on("routeChangeComplete", () => {
 });
 Router.events.on("routeChangeError", () => NProgress.done());
 
-const Noop = () => <div />
+const Noop = ({ children }) => <div>{children}</div>;
 
 function App({ Component, pageProps }) {
   const MainLayout = Component.Layout || Noop;

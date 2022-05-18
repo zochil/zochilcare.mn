@@ -1,3 +1,4 @@
+import axios from "axios";
 import React,{useState,useEffect} from "react";
 import withSizes from "react-sizes";
 import { useAuthState } from "../context/auth";
@@ -66,5 +67,24 @@ const SuccessWithSizes = withSizes(({ width }) => ({
 }))(Success);
 
 SuccessWithSizes.Layout = MainLayout;
+
+export async function getServerSideProps(ctx) {
+  try {
+    const domain = ctx.req.headers.host;
+    const { data: campaign } = await axios.get(`/campaigns/by-domain/${domain}`);
+
+    return {
+      props: { campaign: campaign?.campaign || {} },
+    };
+  } catch(err) {
+    console.error(err);
+    console.log("RESPONSE: ",err.response?.data);
+  }
+
+  return {
+    props: { campaign: {} },
+  };
+}
+
 
 export default SuccessWithSizes;

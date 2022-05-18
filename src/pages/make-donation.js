@@ -1,3 +1,4 @@
+import axios from "axios";
 import Head from "next/head";
 import withSizes from "react-sizes";
 import Skeleton from "react-loading-skeleton";
@@ -35,6 +36,25 @@ function MakeDonation() {
 const MakeDonationWithSizes = withSizes(({ width }) => ({
   isMobile: width < 998,
 }))(MakeDonation);
+
+export async function getServerSideProps(ctx) {
+  try {
+    const domain = ctx.req.headers.host;
+    const { data: campaign } = await axios.get(`/campaigns/by-domain/${domain}`);
+
+    return {
+      props: { campaign: campaign?.campaign || {} },
+    };
+  } catch(err) {
+    console.error(err);
+    console.log("RESPONSE: ",err.response?.data);
+  }
+
+  return {
+    props: { campaign: {} },
+  };
+}
+
 
 MakeDonationWithSizes.Layout = MainLayout;
 
