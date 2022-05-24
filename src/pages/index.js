@@ -105,7 +105,7 @@ function Campaign({ campaign, key }) {
               </p>
             </div>
             <div className="mt-4">
-              <div className="flex justify-between">
+              {/* <div className="flex justify-between">
                 <div className="flex gap-1 process-pledged">
 
                 </div>
@@ -114,9 +114,9 @@ function Campaign({ campaign, key }) {
                     {Math.ceil((campaign.raised * 100) / campaign.goal)}%
                   </span>{" "}
                 </div>
-              </div>
+              </div> */}
 
-              <div className="relative pt-1">
+              {/* <div className="relative pt-1">
                 <div className="flex h-2 mb-4 overflow-hidden text-xs bg-gray-200 rounded">
                   <div
                     style={{
@@ -126,8 +126,8 @@ function Campaign({ campaign, key }) {
                     className="flex flex-col justify-center text-center text-white shadow-none whitespace-nowrap"
                   ></div>
                 </div>
-              </div>
-              <div className="flex justify-between gap-5 mt-5 leading-5 text-gray-500">
+              </div> */}
+              {/* <div className="flex justify-between gap-5 mt-5 leading-5 text-gray-500">
                 <div className="process-funded">
                   <span
                     className="font-bold text-gray-800"
@@ -146,7 +146,8 @@ function Campaign({ campaign, key }) {
                   </span>{" "}
                   зорилт
                 </div>
-              </div>
+              </div> */}
+
               <div className="mt-10">
                 <p className="mb-2 font-bold">
                   Хандивлах дүн сонгох:{" "}
