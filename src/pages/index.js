@@ -59,7 +59,7 @@ function Campaign({ campaign, key }) {
         <title>{campaign.title}</title>
         <meta name="description" content={campaign.title} />
         <meta property="og:title" content={campaign.title} />
-        <meta property="og:description" content={"ЭЛЭГ НЭГТ МОНГОЛЧУУДАА ХАНДИВЫН АЯНД НЭГДЭХИЙГ УРИАЛЖ БАЙНА."} />
+  
         <meta property="og:url" content={`https://${campaign.domain}`} />
         <meta property="og:image" content={campaign.image} />
         <script
