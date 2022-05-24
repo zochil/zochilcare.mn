@@ -1,4 +1,4 @@
-FROM node:14-alpine
+FROM node:16-alpine
 RUN apk add --no-cache make gcc g++ python3
 
 RUN addgroup -S zochil && adduser -S zochil -G zochil
@@ -11,7 +11,7 @@ COPY next.config.js .
 COPY --chown=zochil:zochil ./.next ./.next
 COPY --chown=zochil:zochil ./public ./public
 
-RUN yarn install
+RUN yarn install --immutable --immutable-cache --check-cache
 ENV NODE_ENV production
 
 EXPOSE $PORT
